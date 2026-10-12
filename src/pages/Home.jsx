@@ -1,60 +1,75 @@
 import React from 'react';
-import { SUBJECTS } from '../data/subjectsData';
+import { Link } from 'react-router-dom';
 
-export default function Home({ onSelectSubject, onContinueLast }) {
+export function Home() {
   return (
-    <div style={{ padding: '32px 24px', maxWidth: '1000px', margin: '0 auto' }}>
-      {/* Баннер «Продолжить обучение» */}
-      <div 
-        onClick={onContinueLast}
-        style={{
-          backgroundColor: '#ffffff',
-          borderRadius: '16px',
-          padding: '24px',
-          marginBottom: '32px',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.02)',
-          cursor: 'pointer',
-          transition: 'transform 0.2s'
-        }}
-      >
-        <div style={{ fontSize: '13px', color: '#0f766e', fontWeight: '600', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          Продолжить обучение
-        </div>
-        <div style={{ fontSize: '22px', fontWeight: '700', color: '#1e293b', marginBottom: '12px' }}>
-          Анатомия и физиология: Костная система
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ flex: 1, height: '8px', backgroundColor: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}>
-            <div style={{ width: '72%', height: '100%', backgroundColor: '#0f766e', borderRadius: '4px' }}></div>
+    <div className="home-page">
+      <h1 className="welcome-title">Привет, Алина! 👋</h1>
+      <p className="welcome-subtitle">Продолжим обучение?</p>
+
+      {/* Верхний баннер */}
+      <div className="banner-grid">
+        <div className="continue-card">
+          <span style={{ fontSize: '12px', color: '#788b85', textTransform: 'uppercase' }}>Продолжить обучение</span>
+          <h2 style={{ margin: '8px 0 16px', fontSize: '22px' }}>Анатомия</h2>
+          <p style={{ color: '#788b85', marginBottom: '20px' }}>Костная система</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <Link to="/topic/lesson1">
+              <button className="btn-primary">Продолжить →</button>
+            </Link>
+            <span style={{ fontSize: '14px', color: '#0b2e23', fontWeight: '600' }}>72% completed</span>
           </div>
-          <span style={{ fontSize: '14px', color: '#64748b', fontWeight: '500' }}>72%</span>
+        </div>
+
+        <div className="event-card">
+          <span style={{ fontSize: '12px', color: '#788b85', textTransform: 'uppercase' }}>Сегодня</span>
+          <h3 style={{ margin: '8px 0 4px', fontSize: '16px' }}>Тест по анатомии</h3>
+          <p style={{ color: '#788b85', fontSize: '13px', marginBottom: '16px' }}>15:00</p>
+          <Link to="/training" style={{ color: '#0b2e23', fontWeight: '600', textDecoration: 'none', fontSize: '14px' }}>
+            Перейти →
+          </Link>
         </div>
       </div>
 
-      {/* Список предметов */}
-      <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#1e293b', marginBottom: '16px' }}>
-        Все разделы атласа
-      </h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
-        {SUBJECTS.map((sub) => (
-          <div 
-            key={sub.id}
-            onClick={() => onSelectSubject(sub)}
-            style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '12px',
-              padding: '20px',
-              border: '1px solid #e2e8f0',
-              cursor: 'pointer',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.02)'
-            }}
-          >
-            <div style={{ fontSize: '28px', marginBottom: '12px' }}>{sub.icon}</div>
-            <h3 style={{ fontSize: '16px', fontWeight: '600', color: '#1e293b', margin: '0 0 8px 0' }}>{sub.title}</h3>
-            <p style={{ fontSize: '14px', color: '#64748b', margin: 0, lineHeight: '1.4' }}>{sub.description}</p>
+      {/* Сетка предметов */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <h2 style={{ fontSize: '18px', margin: 0 }}>Мои предметы</h2>
+        <Link to="/subjects" style={{ color: '#788b85', textDecoration: 'none', fontSize: '14px' }}>Все предметы →</Link>
+      </div>
+
+      <div className="subjects-grid">
+        <Link to="/subject/anatomy" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div className="subject-card">
+            <div style={{ fontSize: '32px', marginBottom: '8px' }}>💀</div>
+            <div>Анатомия</div>
+            <span style={{ fontSize: '11px', color: '#4ade80' }}>● В процессе</span>
           </div>
-        ))}
+        </Link>
+        <div className="subject-card" style={{ opacity: 0.7 }}>
+          <div style={{ fontSize: '32px', marginBottom: '8px' }}>🧬</div>
+          <div>Биология</div>
+          <span style={{ fontSize: '11px', color: '#788b85' }}>Скоро</span>
+        </div>
+        <div className="subject-card" style={{ opacity: 0.7 }}>
+          <div style={{ fontSize: '32px', marginBottom: '8px' }}>🧪</div>
+          <div>Химия</div>
+          <span style={{ fontSize: '11px', color: '#788b85' }}>Скоро</span>
+        </div>
+        <div className="subject-card" style={{ opacity: 0.7 }}>
+          <div style={{ fontSize: '32px', marginBottom: '8px' }}>🏛️</div>
+          <div>Латинский язык</div>
+          <span style={{ fontSize: '11px', color: '#788b85' }}>Скоро</span>
+        </div>
+        <div className="subject-card" style={{ opacity: 0.7 }}>
+          <div style={{ fontSize: '32px', marginBottom: '8px' }}>🫀</div>
+          <div>Физиология</div>
+          <span style={{ fontSize: '11px', color: '#788b85' }}>Скоро</span>
+        </div>
+        <div className="subject-card" style={{ opacity: 0.7 }}>
+          <div style={{ fontSize: '32px', marginBottom: '8px' }}>💊</div>
+          <div>Фармакология</div>
+          <span style={{ fontSize: '11px', color: '#788b85' }}>Скоро</span>
+        </div>
       </div>
     </div>
   );
